@@ -22,11 +22,12 @@ for line in linesEnergy:
 #CheckPoints
 print("Program: Appended Energy Values")
 
-linesNumbers = open(numbersFileName).read().splitlines() #
-lineCount = 0
+linesNumbers = open(numbersFileName).read().splitlines() #read the file every line-by-line into this list
+#Appending the data values to their corresponding energy values in order
 for i in range(len(list)):
     for j in range(dataPerEnergy):
-        index= i * dataPerEnergy + j
+        #this index expression represents the index of the overall nmr.txt line in terms of i and j, which are indices for the "2d array"
+        index = i * dataPerEnergy + j
         list[i].data[j] = linesNumbers[index]
 
 #CheckPoints
@@ -55,32 +56,24 @@ for i in range(indexToStartSorting, len(list)-1):
 #CheckPoints
 print("Program: Sorted the List of Energy Values")
 
+#function for writing out to the files
 def outputNLinesToFile(n, list):
     #The File is doesn't have to exist, as it will create or overwrite a file. User feel free to change the file name or path for output
     fileName = filePath + "lowest_" + n + "data.txt" 
 
+    #The + sign means it will overwrite if exists, and create if doesn't
     outputFile = open(fileName, "w+")
+    #Output everything starting from least energy value's data values up until desired energy level
     for energyIndex in range(int(n)):
-        outputFile.write("Energy: " + list[energyIndex].energy + "\n")
-        outputFile.write("Corresponding Data: " + "\n")
         for dataIndex in range(dataPerEnergy):
             outputFile.write(list[energyIndex].data[dataIndex] + "\n")
-        outputFile.write("\n") #newLine after every energy
 
 #User Input/Interaction
 response = "y"
+#loop to always keep getting information until user doesn't want any
 while (response != "n"):
     inp = input("How many energy values (sorted lowest to highest) would you like to see data for (typing zero creates an empty txt file, just don't)? ")
     outputNLinesToFile(inp, list)
     print("File created:", "lowest_" + inp + "data.txt")
     resp = input("Would you like to create another one of these files? (y/n): ")
     response = resp.lower()
-
-
-
-#test, REMOVE PLEASE
-# for x in range(len(list)):
-#     print("SortList", x, list[x].energy)
-
-
-#w+ mode truncates file, so it clears it for writing into
