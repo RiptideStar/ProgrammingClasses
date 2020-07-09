@@ -1,0 +1,14 @@
+Student::Student(const char initId[], double gpa) {
+	strcpy(id, initId);
+	Student::gpa = gpa;
+}
+
+bool Student::isLessThanByID(const Student& aStudent) const {
+	return strcmp(id, aStudent.id) < 0;
+}
+
+G10	3.9
+G20	3.5
+Student 1's id is less than Student 2's ID
+Student 1 qualifies for honor (minimum gpa: 3.6)
+Student 2 doesn't qualify for honor (minimum gpa: 3.6)
