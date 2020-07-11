@@ -9,9 +9,10 @@ filePath = "Woochulpy/EnergyLink1/" #leave blank if not necessary
 energyFileName = filePath + "ener.txt"
 numbersFileName = filePath + "nmr.txt"
 
-#userSetNumbers: user may select preferences for these numbers
+#userSetNumbers: user may change these numbers
 dataPerEnergy = 48  #how many data values per energy value
 indexToStartSorting = 0  #set to zero if the whole list isn't sorted, and set to index n if certain the first n numbers are sorted. Generally, leave this at zero
+constantToMultiplyOutput = 24122.15  #the program will multiply this number to the output file upon request, modify if needed
 
 #creation of a class to link energy values with data
 class EnergyData:
@@ -26,7 +27,7 @@ for line in linesEnergy:
     listEnergyData.append( EnergyData(line) ) #append each line into the energy field of the corresponding energy into a list of energy classes
 
 #CheckPoints
-print("Program: Appended Energy Values")
+print("Program: Appended Energy Values!!")
 
 linesNumbers = open(numbersFileName).read().splitlines() #read the file every line-by-line into this list
 #Appending the data values to their corresponding energy values in order
@@ -37,7 +38,7 @@ for i in range(len(listEnergyData)):
         listEnergyData[i].data[j] = linesNumbers[index]
 
 #CheckPoints
-print("Program: Appended Data Values")
+print("Program: Appended Data Values!!")
 
 """ Sorting Algorithm:
 The general idea here is that I need to circulate through the entire list and pick out the most minimum/negative number. Once I pick out that number,
@@ -60,7 +61,7 @@ for i in range(indexToStartSorting, len(listEnergyData)-1):
     listEnergyData.insert(i, temp)
 
 #CheckPoints
-print("Program: Sorted the List of Energy Values")
+print("Program: Sorted the List of Energy Values!!")
 
 #function for writing out to the files
 def outputNLinesToFile(n, list):
@@ -74,12 +75,38 @@ def outputNLinesToFile(n, list):
         for dataIndex in range(dataPerEnergy):
             outputFile.write(list[energyIndex].data[dataIndex] + "\n")
 
+def multiplyOutputByNumber(constantToMultiplyBy, outputFileName):
+    const = float(constantToMultiplyBy)
+    fileName = filePath + outputFileName
+    linesData = open(fileName).read().splitlines() #read the file every line-by-line into this linesData
+    outputFile = open(fileName, "w+")
+
+    listData = []
+    for line in linesData:
+        num = float(line)
+        listData.append(num*const)  #we will take the read numbers, and append them multiplied to a new list
+    
+    for i in range(len(listData)):
+        outputFile.write(str(listData[i]) + "\n") #overwrite  the values that have been multiplied  back into the file
+    
+    print("Program: Data File multiplied by Requested Value!!")
+
 #User Input/Interaction
 response = "y"
 #loop to always keep getting information until user doesn't want any
 while (response != "n"):
     inp = input("How many energy values (sorted lowest to highest) would you like to see data for (typing zero creates an empty txt file, just don't)? ")
+    outputFile = "lowest_" + inp + "data.txt"
     outputNLinesToFile(inp, listEnergyData)
-    print("File created:", "lowest_" + inp + "data.txt")
+    print("Program: File Created:", outputFile)
+    userMultiplyMenu = "Would you like to multiply the whole data file by " + str(constantToMultiplyOutput) + "? (y/n (OR type d if you want to multiply by a different number)): "
+    response = input(userMultiplyMenu)
+    if (response.lower() == "y"):
+        multiplyOutputByNumber(constantToMultiplyOutput, outputFile)
+    elif (response.lower() == "d"):
+        inp = input("What number would you multiply the whole data file by? ")
+        multiplyOutputByNumber(inp, outputFile)
+
     resp = input("Would you like to create another one of these files? (y/n): ")
     response = resp.lower()
+    
