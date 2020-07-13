@@ -2,11 +2,11 @@
 
 //Function implementations
 
-
 //displays the menu
 void displayMenu()
 {
-	cout << "Welcome to Kyle's Song Workshop:" << endl << endl;
+	cout << "Welcome to Kyle's Song Workshop:" << endl
+		 << endl;
 	cout << "Pick an option" << endl;
 	cout << "(a): Add a Song" << endl;
 	cout << "(d): Display the List" << endl;
@@ -16,7 +16,7 @@ void displayMenu()
 }
 
 //read the option from the user
-char readOption()
+char readCharOption()
 {
 	char input;
 	cin >> input;
@@ -38,9 +38,8 @@ void exeCmd(char option, SongList &list)
 		}
 		else
 		{
-			cout << "Duplicate title! Movie not added!" << endl;
+			cout << "Duplicate Song! Song not added!" << endl;
 		}
-
 		break;
 	case 'd':
 		list.displayList();
@@ -77,39 +76,65 @@ int getInt()
 	return temp;
 }
 
+int getIntAboveMinimum(int min)
+{
+	int num;
+
+	num = getInt();
+	while (num < min)
+	{
+		cout << "The number must not be less than " << min
+			 << endl;
+		cout << "Please try again: ";
+		num = getInt();
+	}
+	return num;
+}
+
+void getString(char string[], int maxChars)
+{
+  cin.get(string, maxChars, '\n');
+  while (!cin)
+  {
+    cin.clear();
+    cin.ignore(maxChars, '\n');
+
+    cout << "You forgot to enter in something! Please try again: ";
+    cin.get(string, maxChars, '\n');
+  }
+  cin.ignore(maxChars, '\n');
+}
+
 //fill out a song (parameterized) upon user interaction
 void populateSongFromUser(Song &aSong)
 {
-    char name[MAX_CHARS];
-    char artist[MAX_CHARS];
+	char name[MAX_CHARS];
+	char artist[MAX_CHARS];
 	int min = 0;
-    int sec = 0;
+	int sec = 0;
 	char album[MAX_CHARS];
 
-    //User Interaction
+	//User Interaction
 	cout << "Enter a name of the song: ";
-	cin.get(name, MAX_CHARS, '\n');
-	cin.ignore(100, '\n');
+	getString(name, MAX_CHARS);
 
-    cout << "Enter an artist for the song: ";
-    cin.get(artist, MAX_CHARS, '\n');
-	cin.ignore(100, '\n');
+	cout << "Enter an artist for the song: ";
+	getString(artist, MAX_CHARS);
 
 	cout << "Enter the minute value for the song (will later ask for seconds value): ";
-	min = getInt();
+	min = getIntAboveMinimum(0);
 
-    cout<< "Enter the seconds value for the song: ";
-    sec = getInt();
+	cout << "Enter the seconds value for the song: ";
+	sec = getIntAboveMinimum(0);
 
 	cout << "Enter the album for the song: ";
-	cin.get(album, MAX_CHARS, '\n');
-	cin.ignore(100, '\n');
+	getString(album, MAX_CHARS);
 
-	//populate aVideo
+	//populate aSong
 	aSong.setName(name);
-    aSong.setArtist(artist);
+	aSong.setArtist(artist);
 	aSong.setMin(min);
-    aSong.setSec(sec);
+	aSong.setSec(sec);
 	aSong.setAlbum(album);
 }
 

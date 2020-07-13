@@ -1,6 +1,5 @@
 #include "song.h"
 
-const char DELIMITER = ';';
 //default constructor
 Song::Song()
 {

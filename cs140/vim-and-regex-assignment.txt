@@ -1,0 +1,21 @@
+1. Write a vim command to change the string "Hello WOrld" to "hello world" in every line that begins with the character 's' in the file.
+:g/^s/%s/Hello WOrld/hello world/g   
+2. Write a vim command to change every occurrence of the word "varA" to the word "var.A/"
+:%s/varA/var\.A\//g
+3. Write a vim command to split every line longer than 40 characters into multiple lines, each of which is no longer than 40 characters (but may be shorter).
+:set tw=40
+4. Write a vim command to change every singular "<" symbol to a double quote ("), but do not convert any double "<" symbols, i.e. leave the "<<" operators alone.
+:%s/<\@<!<<\@!/"/g
+5. Write a vim command to replace all newline characters ('\n') with semicolons (;). The result should be a file with a single line containing ";" characters where the newlines used to be.
+:%s/\n/;/g
+6. Write a vim command to insert the contents of a file named main.cpp at the beginning of the file.
+:0r main.cpp
+7. Write a vim command to append the contents of a file named main.cpp to the end of the file.
+:$r main.cpp
+8. Write a vim command to change the case of every character, i.e. all lower-case characters become upper-case characters, and all upper-case characters become lower-case characters.
+ggVG~
+9. Write a command to quit discarding changes
+:q!
+10. Write a command to delete lines 20 through 30.
+:20,30d
+

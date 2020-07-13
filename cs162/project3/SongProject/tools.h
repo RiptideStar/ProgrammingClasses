@@ -5,8 +5,10 @@
 
 //function prototypes
 int getInt();
+int getIntAboveMinimum(int min);
+void getString(char string[], int maxChars);
 void displayMenu();
-char readOption();
+char readCharOption();
 void exeCmd(char option, SongList &list);
 void populateSongFromUser(Song &aSong);
 void convertCase(char tempStr[]);

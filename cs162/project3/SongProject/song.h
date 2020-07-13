@@ -10,6 +10,7 @@ using namespace std;
 
 //constants
 const int MAX_CHARS = 101;
+const char DELIMITER = ';';
 
 //Class data type for the Video object
 class Song
