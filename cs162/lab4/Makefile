@@ -8,6 +8,6 @@ student.o:	student.h
 
 .PHONY: clean
 clean:	
-	$(info -- cleaning the direcotry --)
+	$(info -- cleaning the directory --)
 	rm -f *.o
 	rm -f app

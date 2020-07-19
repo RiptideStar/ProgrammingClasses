@@ -31,15 +31,15 @@ SongList::SongList(const char fileName[])
     while (!inputFile.eof())
     {
         //get the inputFile data into our temp variables
-        inputFile.ignore(MAX_CHARS, DELIMITER); //5?
+        inputFile.ignore(5, DELIMITER); //5?
         inputFile.get(tempArtist, MAX_CHARS, DELIMITER);
-        inputFile.ignore(MAX_CHARS, DELIMITER);
+        inputFile.ignore(5, DELIMITER);
         inputFile >> tempMin;
         inputFile.ignore(6, DELIMITER);
         inputFile >> tempSec;
         inputFile.ignore(6, DELIMITER);
         inputFile.get(tempAlbum, MAX_CHARS, '\n');
-        inputFile.ignore(MAX_CHARS, '\n');
+        inputFile.ignore(5, '\n');
         //populating song
         song.setName(tempName);
         song.setArtist(tempArtist);
@@ -47,7 +47,7 @@ SongList::SongList(const char fileName[])
         song.setSec(tempSec);
         song.setAlbum(tempAlbum);
         //add the song to this class list
-        this->addASong(song);
+        addASong(song);
         inputFile.get(tempName, MAX_CHARS, DELIMITER);
     }
     inputFile.close();
@@ -65,20 +65,20 @@ bool SongList::addASong(Song &song)
 {
     //temp variables
     char tempName1[MAX_CHARS], tempName2[MAX_CHARS], tempArtist1[MAX_CHARS], tempArtist2[MAX_CHARS];
-    int i = 0, j = 0;
+    int i = 0;
     //compare for duplicate name and artist (together)
     song.getName(tempName2);
     song.getArtist(tempArtist2);
     for (i = 0; i < size; i++)
     {
         list[i].getName(tempName1);
-        list[i].getArtist(tempName2);
-        if (strcmp(tempName1, tempName2) == 0 && strcmp(tempArtist1, tempArtist2))
+        list[i].getArtist(tempArtist1);
+        if (strcmp(tempName1, tempName2) == 0 && strcmp(tempArtist1, tempArtist2) == 0)
             return false;
     }
     //add song to list and increase size
-    size++;
     list[size] = song;
+    size++;
     return true;
 }
 
@@ -87,8 +87,8 @@ void SongList::delSong()
 {
     int selection = 0;
     displayList();
-    cout << "Which song would you like to delete (look above)?: ";
-    selection = getInt();
+    cout << "Which song would you like to delete (look above) (1-" << size << ")?: ";
+    selection = getIntInRange(1,size);
     int index = selection - 1;
     for (int i = index; i < size; i++)
     {
@@ -102,7 +102,7 @@ void SongList::delSong()
 const void SongList::displayList()
 {
     int num = 0;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) 
     {
         num = i + 1;
         cout << num << ". ";

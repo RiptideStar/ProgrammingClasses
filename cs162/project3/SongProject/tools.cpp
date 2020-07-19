@@ -5,8 +5,7 @@
 //displays the menu
 void displayMenu()
 {
-	cout << "Welcome to Kyle's Song Workshop:" << endl
-		 << endl;
+	cout << endl;
 	cout << "Pick an option" << endl;
 	cout << "(a): Add a Song" << endl;
 	cout << "(d): Display the List" << endl;
@@ -34,7 +33,7 @@ void exeCmd(char option, SongList &list)
 		populateSongFromUser(aSong);
 		if (list.addASong(aSong))
 		{
-			cout << "Movie added!" << endl;
+			cout << "Song added!" << endl;
 		}
 		else
 		{
@@ -91,18 +90,33 @@ int getIntAboveMinimum(int min)
 	return num;
 }
 
+int getIntInRange(int min, int max)
+{
+	int num;
+
+	num = getInt();
+	while (num < min || num > max)
+	{
+		cout << "The number must be between (inclusive) " << min << " and " << max
+			 << endl;
+		cout << "Please try again: ";
+		num = getInt();
+	}
+	return num;
+}
+
 void getString(char string[], int maxChars)
 {
-  cin.get(string, maxChars, '\n');
-  while (!cin)
-  {
-    cin.clear();
-    cin.ignore(maxChars, '\n');
+	cin.get(string, maxChars, '\n');
+	while (!cin)
+	{
+		cin.clear();
+		cin.ignore(maxChars, '\n');
 
-    cout << "You forgot to enter in something! Please try again: ";
-    cin.get(string, maxChars, '\n');
-  }
-  cin.ignore(maxChars, '\n');
+		cout << "You forgot to enter in something! Please try again: ";
+		cin.get(string, maxChars, '\n');
+	}
+	cin.ignore(maxChars, '\n');
 }
 
 //fill out a song (parameterized) upon user interaction
@@ -125,7 +139,7 @@ void populateSongFromUser(Song &aSong)
 	min = getIntAboveMinimum(0);
 
 	cout << "Enter the seconds value for the song: ";
-	sec = getIntAboveMinimum(0);
+	sec = getIntInRange(0, 59);
 
 	cout << "Enter the album for the song: ";
 	getString(album, MAX_CHARS);

@@ -6,6 +6,7 @@
 //function prototypes
 int getInt();
 int getIntAboveMinimum(int min);
+int getIntInRange(int min, int max);
 void getString(char string[], int maxChars);
 void displayMenu();
 char readCharOption();

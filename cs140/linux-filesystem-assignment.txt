@@ -1,0 +1,29 @@
+Write a find command that will display the file size of all files in the working directory (only) whose name is exactly 8 characters long.
+find . -maxdepth 1 -name ???????? -printf "%s\n"
+
+Write a find command that will display the inode number of all files in the working directory (only) that contain the string "#include".
+find . -maxdepth 1 -exec grep -q '#include' {} \; -printf "%p %i\n"
+
+Write a find command that will append the string "OLD" to all files in the working directory (only) that have not been modified in the last 365 days.
+find . -maxdepth 1 -type f -mtime +365 -exec sh -c "echo OLD >> {}" \;
+
+Write an ls command with a glob specification that will list the names of all files in the working directory that are exactly 10 characters long, begin with w, x, y, or z, and do not contain a "." character (i.e. no file extension).
+ls [w-z]*[!.][!.][!.][!.][!.][!.][!.][!.][!.]
+
+Write an ls command with a glob specification that will list the names of all files in the working directory with names between 5 and 15 characters in length. (I did it the long way haha)
+ls ????? ?????? ??????? ???????? ????????? ?????????? ??????????? ???????????? ????????????? ?????????????? ???????????????
+
+Write a bash command to list the inode number of the file in the working directory with the largest inode.
+find -maxdepth 1 -printf "%i\n" | sort -n | tail -n 1
+
+Write a command that will list the names of all link files in the working directory, sorted by inode number.
+find . -maxdepth 1 -type l -printf "%i %p\n" | sort -n
+
+Write a command that will list the highest inode number used on the file system that supports /home/student.
+find /home/student -printf "%i %p\n" 2> /dev/null | sort -n | tail -n 1
+
+Write a command that will list the names of all executable files in the working directory, sorted by file size.
+find . -executable -type f -printf "%p\t%s\n" | sort -n -t\t -k2
+
+Write a command that will list the names of all non-executable files in the working directory, sorted modification time.
+find . -maxdepth 1 ! -executable -type f -printf "%p\t%T@\n" | sort -n -t\t -k2

@@ -5,8 +5,8 @@ Song::Song()
 {
 	strcpy(name, "No particular Name");
 	strcpy(artist, "No particular artist");
-    min = 0;
-    sec = 0;
+	min = 0;
+	sec = 0;
 	strcpy(album, "No particular Album");
 }
 
@@ -14,9 +14,9 @@ Song::Song()
 Song::Song(char initName[], char initArtist[], int initMin, int initSec, char initAlbum[])
 {
 	strcpy(name, initName);
-    strcpy(artist, initArtist);
-    min = initMin;
-    sec = initSec;
+	strcpy(artist, initArtist);
+	min = initMin;
+	sec = initSec;
 	strcpy(album, initAlbum);
 }
 
@@ -26,8 +26,9 @@ const void Song::getName(char targetName[])
 {
 	strcpy(targetName, name);
 }
-const void Song::getArtist(char targetArtist[]) {
-    strcpy(targetArtist, artist);
+const void Song::getArtist(char targetArtist[])
+{
+	strcpy(targetArtist, artist);
 }
 const int Song::getMin()
 {
@@ -37,8 +38,9 @@ const int Song::getSec()
 {
 	return sec;
 }
-const void Song::getAlbum(char targetAlbum[]) {
-    strcpy(targetAlbum, album);
+const void Song::getAlbum(char targetAlbum[])
+{
+	strcpy(targetAlbum, album);
 }
 
 //mutator functions
@@ -66,11 +68,19 @@ void Song::setAlbum(char newAlbum[])
 //print function to screen
 const void Song::printSong()
 {
-	cout << name << DELIMITER << artist << DELIMITER << min << DELIMITER << sec << DELIMITER << album << endl;
+	if (sec < 10)
+		cout << name << DELIMITER << artist << DELIMITER << min << DELIMITER << "0" << sec << DELIMITER << album << endl;
+	else
+	{
+		cout << name << DELIMITER << artist << DELIMITER << min << DELIMITER << sec << DELIMITER << album << endl;
+	}
 }
 
 //print function to file
 const void Song::printFile(ofstream &outFile)
 {
-	outFile << name << DELIMITER << artist << DELIMITER << min << DELIMITER << sec << DELIMITER << album << endl;
+	if (sec < 10)
+		outFile << name << DELIMITER << artist << DELIMITER << min << DELIMITER << "0" << sec << DELIMITER << album << endl;
+	else
+		outFile << name << DELIMITER << artist << DELIMITER << min << DELIMITER << sec << DELIMITER << album << endl;
 }

@@ -1,19 +1,26 @@
+/*
+Kyle Zhang
+CS162 Project 3
+
+Sources: sampleproject3.tar from d2l server
+*/
+
 #include "tools.h"
 #include <cstring>
 #include <cstdlib>
-//main
+
 int main()
 {
-	//create the list object
-	SongList list("movies.txt");
-	char option;
-	//display the menu
+	//instantiate list object and then feed in the file to read
+	SongList list("songs.txt");
+	char op;
+	cout << "Welcome to Kyle's Song Workshop:" << endl;
 	do
 	{
 		displayMenu();
-		option = readCharOption();
-		exeCmd(option, list);
-	} while (tolower(option) != 'q');
+		op = readCharOption();
+		exeCmd(op, list);
+	} while (tolower(op) != 'q');
 
 	return 0;
 }
