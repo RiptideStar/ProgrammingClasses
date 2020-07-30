@@ -3,58 +3,52 @@
 //default constructor
 Song::Song()
 {
-	//setting the name to noParticularName
-	char noParticularName[] = "No particular Name";
-	int lenName = strlen(noParticularName) + 1;
-	name = new char[lenName];
-	strcpy(name, noParticularName);
-
-	//setting artist to noParticularArtist
-	char noParticularArtist[] = "No particular Artist";
-	int lenArtist = strlen(noParticularArtist) + 1;
-	artist = new char[lenArtist];
-	strcpy(artist, noParticularArtist);
-
-	//initializing the int variables min and sec
+	name = NULL;
+	artist = NULL;
 	min = 0;
 	sec = 0;
-
-	//setting album to noParticularAlbum
-	char noParticularAlbum[] = "No particular Album";
-	int lenAlbum = strlen(noParticularAlbum) + 1;
-	album = new char[lenAlbum];
-	strcpy(album, noParticularAlbum);
+	album = NULL;
 }
 
 //constructor with parameters
-Song::Song(char initName[], char initArtist[], int initMin, int initSec, char initAlbum[])
+Song::Song(char *initName, char *initArtist, int initMin, int initSec, char *initAlbum)
 {
-	//initializing name
-	int lenName = strlen(initName) + 1;
-	name = new char[lenName];
+	name = new char[strlen(initName) + 1];
+	artist = new char[strlen(initArtist) + 1];
+	album = new char[strlen(initAlbum) + 1];
+
 	strcpy(name, initName);
-
-	//initializing artist
-	int lenArtist = strlen(initArtist) + 1;
-	artist = new char[lenArtist];
 	strcpy(artist, initArtist);
-
-	//initializing the int variables min and sec
 	min = initMin;
 	sec = initSec;
-
-	//initializing album
-	int lenAlbum = strlen(initAlbum) + 1;
-	album = new char[lenAlbum];
 	strcpy(album, initAlbum);
 }
 
-//deconstructor: deallocate memory
-Song::~Song()
+//copy constructor
+Song::Song(Song &song2)
 {
-	delete[] name;
-	delete[] artist;
-	delete[] album;
+	if (name)
+		delete[] name;
+	if (artist)
+		delete[] artist;
+	if (album)
+		delete[] album;
+
+	char buffer[MAX_CHARS];
+	song2.getName(buffer);
+	name = new char[strlen(buffer) + 1];
+	strcpy(name, buffer);
+
+	song2.getArtist(buffer);
+	artist = new char[strlen(buffer) + 1];
+	strcpy(artist, buffer);
+
+	song2.getAlbum(buffer);
+	album = new char[strlen(buffer) + 1];
+	strcpy(album, buffer);
+
+	min = song2.getMin();
+	sec = song2.getSec();
 }
 
 //accessor and mutator functions
@@ -83,10 +77,16 @@ const void Song::getAlbum(char targetAlbum[])
 //mutator functions
 void Song::setName(char newName[])
 {
+	if (name != NULL)
+		delete[] name;
+	name = new char[(int)strlen(newName) + 1];
 	strcpy(name, newName);
 }
 void Song::setArtist(char newArtist[])
 {
+	if (artist != NULL)
+		delete[] artist;
+	artist = new char[(int)strlen(newArtist) + 1];
 	strcpy(artist, newArtist);
 }
 void Song::setMin(int newMin)
@@ -99,7 +99,18 @@ void Song::setSec(int newSec)
 }
 void Song::setAlbum(char newAlbum[])
 {
+	if (album != NULL)
+		delete[] album;
+	album = new char[(int)strlen(newAlbum) + 1];
 	strcpy(album, newAlbum);
+}
+
+//deconstructor
+Song::~Song()
+{
+	delete[] name;
+	delete[] artist;
+	delete[] album;
 }
 
 //print function to screen

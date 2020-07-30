@@ -1,7 +1,6 @@
 /*
 Kyle Zhang
 CS162 Project 4
-7/28 - 7/30
 */
 
 #include "tools.h"

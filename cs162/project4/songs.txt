@@ -1,0 +1,11 @@
+Stereo Hearts;Gym Class Heroes;3;34;The Papercut
+Chronicles II Counting Stars;OneRepublic;4;17;Native
+SongfromArtist;Artist;3;03;ThirdAlbum
+Song4fromArtist1;Artist1;4;44;ThirdAlbum
+Song5FromArtist2;Artist2;0;48;4thAlbum
+Song6FromArtist2;Artist2;3;23;4thAlbum
+Song7;Artist2;5;03;4thAlbum
+Song8;Artist3;2;56;5thAlbum
+Song9;Artist3;5;45;5thAlbum
+Song10;Artist4;4;23;6thAlbum
+Song11;Artist4;3;23;6thAlbum

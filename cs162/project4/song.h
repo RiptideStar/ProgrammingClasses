@@ -9,7 +9,7 @@
 using namespace std;
 
 //constants
-const int MAX_CHARS = 101;
+const int MAX_CHARS = 91;
 const char DELIMITER = ';';
 
 //Class data type for the Video object
@@ -24,8 +24,10 @@ private:
 public:
     //constructors
     Song();
-    Song(char initName[], char initArtist[], int initMin, int initSec, char initAlbum[]);
-    //deconstructor
+    Song(char* initName, char* initArtist, int initMin, int initSec, char* initAlbum);
+    //copy constructor
+    Song(Song &song2);
+    //Deconstructor
     ~Song();
     //setters and getters functions
     const void getName(char targetName[]);

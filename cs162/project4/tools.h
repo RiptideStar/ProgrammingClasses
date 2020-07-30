@@ -7,7 +7,6 @@
 int getInt();
 int getIntAboveMinimum(int min);
 int getIntInRange(int min, int max);
-int getStringAndSize(char string[], int maxChars);
 void getString(char string[], int maxChars);
 void displayMenu();
 char readCharOption();

@@ -67,7 +67,7 @@ int getInt()
 	{
 		cin.clear();
 		cin.ignore(100, '\n');
-		cout << "Invalid input!! Please try again!!";
+		cout << "Invalid input!! Please try again: ";
 		cin >> temp;
 	}
 	cin.ignore(100, '\n');
@@ -105,14 +105,6 @@ int getIntInRange(int min, int max)
 	return num;
 }
 
-/* 
-Puts input string into string[] and also returns the size of the string
-*/
-int getStringAndSize(char string[], int maxChars) {
-	getString(string, maxChars);
-	return strlen(string) + 1; //there will be a '\0' char at the end, to add to the "length"
-}
-
 void getString(char string[], int maxChars)
 {
 	cin.get(string, maxChars, '\n');
@@ -138,10 +130,10 @@ void populateSongFromUser(Song &aSong)
 
 	//User Interaction
 	cout << "Enter a name of the song: ";
-	int nameLen = getStringAndSize(name, MAX_CHARS); //	TODO
+	getString(name, MAX_CHARS);
 
 	cout << "Enter an artist for the song: ";
-	int artistLen = getStringAndSize(artist, MAX_CHARS); // TODO
+	getString(artist, MAX_CHARS);
 
 	cout << "Enter the minute value for the song (will later ask for seconds value): ";
 	min = getIntAboveMinimum(0);
