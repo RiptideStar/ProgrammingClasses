@@ -17,13 +17,19 @@ public:
 
     void addToHead(int val);
     void addToTail(int val);
+    void addToTailRecursive(Node *curr, int val);
+
+    int sum();
+    int sumRecursive(Node *curr);
 
     void printAll();
 
     int removeFromHead();
     int removeFromTail();
+    int removeFromTailRecursive(Node * curr);
+
 private:
-    Node * head;
+    Node *head;
 };
 
 #endif
