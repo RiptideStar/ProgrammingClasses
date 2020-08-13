@@ -1,0 +1,12 @@
+Chronicles II Counting Stars;OneRepublic;4;17;Native
+SongAfromArtist;Artist;3;03;ThirdAlbum
+SongBfromArtist1;Artist1;4;44;ThirdAlbum
+SongCFromArtist2;Artist2;0;48;4thAlbum
+SongDFromArtist2;Artist2;3;23;4thAlbum
+SongE;Artist2;5;03;4thAlbum
+SongF;Artist3;2;56;5thAlbum
+SongG;Artist3;5;45;5thAlbum
+SongH;Artist4;4;23;6thAlbum
+SongJ;Artist4;3;23;6thAlbum
+Stereo Hearts;Gym Class Heroes;3;34;The Papercut
+Unfortune;Flowmer;3;04;Flow
