@@ -153,6 +153,7 @@ bool SongList::addASong(Song &song)
 }
 
 //deletes a song from the list
+//if index is larger than the size of list, last song is removed
 void SongList::delSong()
 {
     int selection = 0;
